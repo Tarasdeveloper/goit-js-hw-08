@@ -22,6 +22,7 @@ const galleryMarkup = galleryItems
             </li>`;
   })
   .join('');
+
 galleryList.innerHTML = galleryMarkup;
 
 const lightbox = new SimpleLightbox('.gallery .gallery__link', {
