@@ -27,6 +27,7 @@ populateInputs();
 
 function onFormSubmit(evt) {
   evt.preventDefault();
+  console.log(formData);
   evt.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
@@ -36,8 +37,8 @@ function onFormSubmit(evt) {
 // - Добавляем throttle
 
 function onTextAreaInput(evt) {
-  const message = evt.target.value;
-  localStorage.setItem(`${STORAGE_KEY}-message`, message);
+  formData.message = evt.target.value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
 // - Получаем значение поля email
@@ -45,22 +46,23 @@ function onTextAreaInput(evt) {
 // - Добавляем throttle
 
 function onEmailInput(evt) {
-  const email = evt.target.value;
-  localStorage.setItem(`${STORAGE_KEY}-email`, email);
+  formData.email = evt.target.value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
 // - Получаем значение из хранилища
 // - Если там что-то было, обновляем DOM
 
 function populateInputs() {
-  const savedMessage = localStorage.getItem(`${STORAGE_KEY}-message`);
-  const savedEmail = localStorage.getItem(`${STORAGE_KEY}-email`);
+  const savedFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  // const savedEmail = localStorage.getItem(`${STORAGE_KEY}-email`);
 
-  if (savedMessage) {
-    refs.textarea.value = savedMessage;
+  if (savedFormData && savedFormData.message) {
+    refs.textarea.value = savedFormData.message;
   }
 
-  if (savedEmail) {
-    refs.email.value = savedEmail;
+  if (savedFormData && savedFormData.email) {
+    refs.email.value = savedFormData.email;
   }
+  console.log(savedFormData);
 }
