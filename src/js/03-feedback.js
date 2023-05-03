@@ -27,7 +27,7 @@ populateInputs();
 
 function onFormSubmit(evt) {
   evt.preventDefault();
-  console.log(formData);
+  console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
   evt.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
@@ -64,5 +64,4 @@ function populateInputs() {
   if (savedFormData && savedFormData.email) {
     refs.email.value = savedFormData.email;
   }
-  console.log(savedFormData);
 }
